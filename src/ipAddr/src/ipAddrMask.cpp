@@ -1,6 +1,6 @@
-#include<stdio.h>
-#include<include/print.h>
-#include<ipAddr.cpp>
+#include <stdio.h>
+#include "include/print.h"
+#include "ipAddr.cpp"
 
 class IpMask : public ipAddr 
 {
@@ -15,18 +15,18 @@ class IpMask : public ipAddr
     mask = m;
   }
 
-  IpMask(unsigned int ip, unsigned int mask) {
-   ipAddr(ip);
-   this.mask = mask;
+  IpMask(unsigned int ip, unsigned int msk):ipAddr(ip) {
+   mask = msk;
   }
 
   IpMask(char *ipMask) {
-   char cip[16];
-   int ii = 0;
-   while(*ipMask != '\0' && *ipMask != '\\' && i<16)
-    ip[i] = ipMask[i++];
-   ip[i] = '\0';
-   ipAddr(ip);
-   mask = atoi(ipMask[i]);
+   char cIp[16];
+   int i = 0;
+   while(*ipMask != '\0' && *ipMask != '\\' && i<16){
+    cIp[i] = ipMask[i++];
+   }
+   cIp[i] = '\0';
+   setCharToIpAddr(cIp);
+   mask = atoi(ipMask+i);
   }
-}
+};

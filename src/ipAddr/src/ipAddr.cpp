@@ -65,6 +65,38 @@ class ipAddr {
     }
   
    }
+  // supports only ipv4 for now
+   
+   void setCharToIpAddr(const char* ip)
+   {
+    char  temp[8];
+    int i=0;          // No of chars per octet (3)
+    int octet=0;      // to store each octet every time
+    int noOfOctet = 4;
+    memset(addr, 0, sizeof(addr));
+    PRINT(("in constructor addr6 = %s", ip));
+    while(*(ip) != '\0' && noOfOctet)
+    { 
+     
+     PRINT(("in constructor addr6 outside loop %c", *ip));
+     i=0;
+     octet =0; 
+     noOfOctet--;
+     while(*ip !='.' && i < 3 && *ip != '\0')
+     {
+      PRINT(("in constructor addr6 inside loop *ip = %c", *ip));
+      temp[i++] = *(ip++);
+      PRINT(("in constructor addr6 inside loop temp = %s", temp));
+     }
+     temp[i] = '\0';
+     octet = atoi(temp);// check octect > 0 and < 255 
+     addr[3] |= octet << 8*(noOfOctet);
+     PRINT(("in constructor addr6 outside loop addr = %x", addr[3]));
+     ip++;
+    }
+  
+   }
+
 
    //TODO create proper conditions and endianess 
    int isV4()	
@@ -98,7 +130,7 @@ class ipAddr {
 
  };
 
-#define UT
+//#define UT
 
 #ifdef UT
 int main()
